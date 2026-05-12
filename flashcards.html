@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+  <title>Flashcards — AP Study Hub</title>
+  <link rel="stylesheet" href="style.css"/>
+</head>
+<body>
+
+<nav class="nav">
+  <div class="nav-logo"><span>AP</span> Study Hub</div>
+  <ul class="nav-links">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="study.html">Study</a></li>
+  </ul>
+</nav>
+
+<a id="fc-back-link" href="study.html" class="back-link">← Back to Study Guide</a>
+
+<div class="fc-page">
+
+  <!-- Header -->
+  <div class="fc-header">
+    <h1 id="fc-title">Flashcards</h1>
+    <div class="fc-meta-row">
+      <span class="fc-counter" id="fc-counter">1 / —</span>
+      <span class="fc-score" id="fc-score">✓ 0  ✗ 0</span>
+    </div>
+  </div>
+
+  <!-- Progress bar -->
+  <div class="fc-progress">
+    <div class="fc-progress-bar" id="fc-bar"></div>
+  </div>
+
+  <!-- Card (click to flip) -->
+  <div class="fc-scene" onclick="flipCard()">
+    <div class="fc-card" id="fc-card">
+
+      <div class="fc-face fc-front">
+        <div class="fc-face-label">Term / Concept</div>
+        <div class="fc-face-text" id="fc-front-text">Loading…</div>
+        <div class="fc-tap-hint">Tap to reveal answer</div>
+      </div>
+
+      <div class="fc-face fc-back">
+        <div class="fc-face-label">Definition / Explanation</div>
+        <div class="fc-face-text" id="fc-back-text"></div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Know it / Still learning -->
+  <div class="fc-controls">
+    <button class="fc-btn unknown" onclick="markUnknown()">✗ Still Learning</button>
+    <button class="fc-btn known"   onclick="markKnown()">✓ Got It</button>
+  </div>
+
+  <!-- Prev / Flip / Next -->
+  <div class="fc-nav-row">
+    <button class="fc-btn" id="fc-prev" onclick="prevCard()">← Prev</button>
+    <button class="fc-flip-btn"         onclick="flipCard()">🔄 Flip</button>
+    <button class="fc-btn" id="fc-next" onclick="nextCard()">Next →</button>
+  </div>
+
+  <!-- Shuffle / Restart -->
+  <div class="fc-util-row">
+    <button class="fc-util-btn" onclick="shuffleDeck()">🔀 Shuffle</button>
+    <button class="fc-util-btn" onclick="restartDeck()">↩ Restart</button>
+  </div>
+
+</div>
+
+<footer><strong>AP Study Hub</strong> · Content aligned with College Board standards</footer>
+<script src="script.js"></script>
+</body>
+</html>

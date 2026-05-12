@@ -5,132 +5,93 @@
   <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
   <title>AP English Language — AP Study Hub</title>
   <link rel="stylesheet" href="style.css"/>
-  <style>
-    :root { --subject-accent:#e76f51; --subject-bg:#fef0ed; }
-  </style>
+  <style>:root { --subject-accent: #f43f5e; }</style>
 </head>
 <body>
 
-  <nav class="nav">
-    <div class="nav-logo"><span>AP</span> Study Hub</div>
-    <ul class="nav-links">
-      <li><a href="index.html">Home</a></li>
-      <li><a href="study.html" class="active">Study</a></li>
+<nav class="nav">
+  <div class="nav-logo"><span>AP</span> Study Hub</div>
+  <ul class="nav-links">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="study.html" class="active">Study</a></li>
+  </ul>
+</nav>
+
+<a href="study.html" class="back-link">← Back</a>
+
+<div class="study-page">
+
+  <div class="unit-header">
+    <h1>AP English Language</h1>
+    <p>Rhetoric, argumentation, and analytical writing. Three essays on exam day: synthesis, rhetorical analysis, and argument.</p>
+    <div class="unit-meta">
+      <span class="unit-tag">📅 Exam: May</span>
+      <span class="unit-tag">⏱ 3 hr 15 min</span>
+      <span class="unit-tag warn">🔥 Difficulty: Medium</span>
+      <span class="unit-tag accent">~55% pass rate</span>
+    </div>
+  </div>
+
+  <div class="exam-tip-box">
+    <div class="tip-label">⚡ Exam Tips</div>
+    <ul>
+      <li>Never just label a device — always explain the EFFECT it creates on the reader</li>
+      <li>A vague thesis caps your score at a 3 — name strategies AND explain how they achieve purpose</li>
+      <li>Synthesis: pick a side quickly. You have limited time — don't try to be neutral</li>
+      <li>Argument essay: address a counterargument to earn higher scores</li>
+      <li>Read one op-ed daily leading up to the exam — trains fast rhetorical analysis</li>
     </ul>
-  </nav>
+  </div>
 
-  <div class="subject-hero">
-    <a href="study.html" class="back-link">← Back to Subjects</a>
-    <h1>AP English Language & Composition</h1>
-    <div class="subject-meta">
-      <span class="meta-pill">📅 Exam: May</span>
-      <span class="meta-pill">⏱ 3 hours 15 min</span>
-      <span class="meta-pill accent">Difficulty: Medium</span>
-      <span class="meta-pill">~55% pass rate (score 3+)</span>
+  <div class="quick-actions">
+    <div class="action-btn"><span class="action-icon">📝</span>Notes</div>
+    <a href="flashcards.html?subject=english" class="action-btn"><span class="action-icon">🃏</span>Flashcards</a>
+    <div class="action-btn"><span class="action-icon">⚡</span>Quiz</div>
+    <div class="action-btn"><span class="action-icon">✍️</span>FRQs</div>
+    <a href="https://youtu.be/qDWyI4N2k0o?si=8wTUkXTrr8CDW1vj" target="_blank" rel="noopener" class="action-btn"><span class="action-icon">▶️</span>Video</a>
+    <div class="action-btn"><span class="action-icon">📊</span>Progress</div>
+  </div>
+
+  <div class="study-section">
+    <div class="section-label">📚 Core Topics</div>
+    <div class="section-title">What's on the Exam</div>
+    <ul class="topic-list">
+      <li class="topic-item"><div class="topic-name">Rhetorical Situation</div><div class="topic-desc">Purpose, audience, genre, occasion — every choice the author makes connects back to these</div></li>
+      <li class="topic-item"><div class="topic-name">Claims, Evidence & Reasoning</div><div class="topic-desc">Claim → specific evidence → reasoning that connects evidence back to claim (don't skip reasoning)</div></li>
+      <li class="topic-item"><div class="topic-name">Rhetorical Appeals (Ethos/Logos/Pathos)</div><div class="topic-desc">Identify which appeal is used and explain WHY the author chose it — effect on the audience</div></li>
+      <li class="topic-item"><div class="topic-name">Style & Tone</div><div class="topic-desc">Diction, syntax, figurative language — analyze the effect of specific word and structure choices</div></li>
+      <li class="topic-item"><div class="topic-name">Synthesis Essay</div><div class="topic-desc">Form your own argument using 3+ of 6–7 provided sources. Don't summarize — use sources as evidence</div></li>
+      <li class="topic-item"><div class="topic-name">Argument Essay</div><div class="topic-desc">Take a clear position, use real-world evidence, address a counterargument, show nuanced reasoning</div></li>
+    </ul>
+  </div>
+
+  <div class="study-section">
+    <div class="section-label">📋 Exam Format & Scoring</div>
+    <div class="section-title">What to Expect</div>
+    <div class="exam-rows">
+      <div class="exam-row"><span class="exam-row-label">Multiple Choice</span><span class="exam-row-value">45 Qs · 60 min · reading passages</span></div>
+      <div class="exam-row"><span class="exam-row-label">Synthesis Essay</span><span class="exam-row-value">~40 min · 6–7 sources provided</span></div>
+      <div class="exam-row"><span class="exam-row-label">Rhetorical Analysis</span><span class="exam-row-value">~40 min · analyze a given text</span></div>
+      <div class="exam-row"><span class="exam-row-label">Argument Essay</span><span class="exam-row-value">~40 min · defend your position</span></div>
+      <div class="exam-row"><span class="exam-row-label">Essay Scoring</span><span class="exam-row-value">Thesis (1) + Evidence (4) + Complexity (1) = 6 pts</span></div>
+      <div class="exam-row"><span class="exam-row-label">Weighting</span><span class="exam-row-value">MC = 45% · FRQ = 55%</span></div>
     </div>
   </div>
 
-  <div class="subject-content">
-
-    <!-- EXAM FORMAT -->
-    <div class="info-block" style="animation-delay:0s">
-      <h2><span class="block-icon">📋</span> Exam Format</h2>
-      <table class="exam-table">
-        <tr><th>Section</th><th>Details</th></tr>
-        <tr><td>Multiple Choice</td><td>45 questions · 60 min · Reading passages + questions</td></tr>
-        <tr><td>Synthesis Essay (FRQ 1)</td><td>~40 min · Use 6–7 provided sources to support your argument</td></tr>
-        <tr><td>Rhetorical Analysis (FRQ 2)</td><td>~40 min · Analyze how an author builds their argument</td></tr>
-        <tr><td>Argument Essay (FRQ 3)</td><td>~40 min · Take a position and defend it with evidence</td></tr>
-        <tr><td>Score Weighting</td><td>Multiple Choice = 45% · Free Response = 55%</td></tr>
-      </table>
-    </div>
-
-    <!-- CORE TOPICS -->
-    <div class="info-block" style="animation-delay:0.08s">
-      <h2><span class="block-icon">📚</span> Core Topics & Skills</h2>
-
-      <div class="topic-row">
-        <h3><span class="topic-dot"></span> Rhetorical Situation</h3>
-        <p>Every piece of writing has a context. Identify the author's purpose (to inform, persuade, entertain), their audience (who they're writing for and what that audience values), the genre and occasion, and how those factors shape every choice the writer makes.</p>
-      </div>
-
-      <div class="topic-row">
-        <h3><span class="topic-dot"></span> Claims, Evidence & Reasoning</h3>
-        <p>Strong arguments have a clear claim (what you're arguing), relevant and specific evidence (facts, examples, quotes), and reasoning that explicitly connects the evidence back to the claim. The reasoning is what most students skip — don't skip it.</p>
-      </div>
-
-      <div class="topic-row">
-        <h3><span class="topic-dot"></span> Rhetorical Appeals</h3>
-        <p>Ethos (credibility — the author establishes trust), Logos (logic — statistics, facts, logical structure), and Pathos (emotion — word choice, anecdotes, imagery that creates an emotional response). Be able to identify all three in any passage and explain WHY the author chose each appeal.</p>
-      </div>
-
-      <div class="topic-row">
-        <h3><span class="topic-dot"></span> Style & Tone</h3>
-        <p>How an author writes is as important as what they say. Analyze diction (word choice), syntax (sentence structure), tone (the author's attitude toward the subject), and figurative language. Ask: why did the author choose this word or this sentence structure here?</p>
-      </div>
-
-      <div class="topic-row">
-        <h3><span class="topic-dot"></span> Synthesis Writing</h3>
-        <p>The synthesis essay gives you 6–7 sources on one topic. Your job is to form your own argument and use at least 3 sources as evidence to support it. Do NOT just summarize the sources — use them to prove your point. Cite them as (Source A), (Source B), etc.</p>
-      </div>
-
-      <div class="topic-row">
-        <h3><span class="topic-dot"></span> Rhetorical Analysis Essay</h3>
-        <p>You'll be given a speech, essay, or article and asked to analyze how the author uses rhetorical choices to achieve their purpose. Write a thesis that identifies specific strategies, then analyze WHY each choice works — don't just label it (avoid "they use pathos here").</p>
-      </div>
-
-      <div class="topic-row">
-        <h3><span class="topic-dot"></span> Argument Essay</h3>
-        <p>You argue a position on an open-ended prompt using your own knowledge and examples. Strong argument essays have a nuanced thesis, specific real-world evidence, at least one counterargument addressed and refuted, and a line of reasoning that ties everything together.</p>
-      </div>
-    </div>
-
-    <!-- KEY TERMS -->
-    <div class="info-block" style="animation-delay:0.12s">
-      <h2><span class="block-icon">🔑</span> Must-Know Vocabulary</h2>
-      <div class="terms-grid">
-        <div class="term-card"><strong>Ethos</strong><span>Appeal to credibility — establishing the author as trustworthy or qualified</span></div>
-        <div class="term-card"><strong>Logos</strong><span>Appeal to logic — using facts, data, statistics, and reasoning</span></div>
-        <div class="term-card"><strong>Pathos</strong><span>Appeal to emotion — word choice, imagery, or stories that create feeling</span></div>
-        <div class="term-card"><strong>Thesis</strong><span>A specific, arguable claim that responds to the prompt with a line of reasoning</span></div>
-        <div class="term-card"><strong>Diction</strong><span>The specific words an author chooses and the effect those choices create</span></div>
-        <div class="term-card"><strong>Syntax</strong><span>Sentence structure — length, punctuation, fragments, or parallelism for effect</span></div>
-        <div class="term-card"><strong>Tone</strong><span>The author's attitude toward the subject (e.g., urgent, ironic, reverent)</span></div>
-        <div class="term-card"><strong>Counterargument</strong><span>An opposing view that a writer acknowledges and then refutes or concedes</span></div>
-        <div class="term-card"><strong>Anaphora</strong><span>Repeating the same word or phrase at the start of successive sentences for emphasis</span></div>
-        <div class="term-card"><strong>Juxtaposition</strong><span>Placing contrasting ideas side by side to highlight their differences</span></div>
-      </div>
-    </div>
-
-    <!-- ESSAY SCORING -->
-    <div class="info-block" style="animation-delay:0.14s">
-      <h2><span class="block-icon">🎯</span> How Essays Are Scored (1–6 per essay)</h2>
-      <table class="exam-table">
-        <tr><th>Row</th><th>What Graders Look For</th></tr>
-        <tr><td>Thesis (0–1 pt)</td><td>Makes a specific, defensible claim. Does NOT just restate the prompt. Earns 1 point or 0 — no partial credit.</td></tr>
-        <tr><td>Evidence & Commentary (0–4 pts)</td><td>Uses relevant, specific evidence AND explains how it supports the thesis. More explanation = more points.</td></tr>
-        <tr><td>Sophistication (0–1 pt)</td><td>Demonstrates a nuanced understanding — complex line of reasoning, effective use of rhetorical choices, or compelling style. Hard to earn; don't chase it.</td></tr>
-      </table>
-    </div>
-
-    <!-- STUDY TIPS -->
-    <div class="info-block" style="animation-delay:0.16s">
-      <h2><span class="block-icon">💡</span> Study Tips</h2>
-      <ul class="detail-tips">
-        <li data-n="1">Write a timed essay every week. AP Lang is a writing exam — the only way to improve is to write under real conditions. Set a 40-minute timer, write the full essay, then compare to a rubric. Repeat.</li>
-        <li data-n="2">Never just label a rhetorical device — always explain the effect. "The author uses anaphora" earns nothing. "The author's anaphora creates a sense of urgency, pressuring the reader to act immediately" earns points.</li>
-        <li data-n="3">Your thesis is everything. A vague thesis caps your score at a 3. A strong thesis names the author's strategies AND explains how they work together to achieve the purpose. Write your thesis first, then build the essay around it.</li>
-        <li data-n="4">Read one op-ed, editorial, or speech every day. The more non-fiction you read actively — identifying claims, evidence, and appeals as you go — the faster and more naturally you'll analyze passages on the exam.</li>
-        <li data-n="5">For the synthesis essay, pick a side quickly. You have limited time. Spend 5 minutes reading sources, 5 minutes outlining, and 30 minutes writing. Don't try to be neutral — strong arguments take a clear position.</li>
-      </ul>
-    </div>
-
+  <div class="study-section">
+    <div class="section-label">💡 Study Tips</div>
+    <div class="section-title">How to Prepare</div>
+    <ul class="tips-list">
+      <li data-n="1">Write a timed essay every week — set 40 minutes, write the full essay, then score it with the rubric</li>
+      <li data-n="2">Your thesis is everything — practice writing it in under 2 minutes: specific claim + line of reasoning</li>
+      <li data-n="3">Never just label a rhetorical device — "they use anaphora" earns nothing. Explain the effect it creates</li>
+      <li data-n="4">For synthesis: spend 5 min reading, 5 min outlining, 30 min writing — don't overthink source selection</li>
+    </ul>
   </div>
 
-  <footer>
-    <strong>AP Study Hub</strong> · Built for students, by students ·
-    Content aligned with College Board standards
-  </footer>
-  <script src="script.js"></script>
+</div>
+
+<footer><strong>AP Study Hub</strong> · Content aligned with College Board standards</footer>
+<script src="script.js"></script>
 </body>
 </html>

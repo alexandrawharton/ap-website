@@ -18,128 +18,16 @@
 
   <div class="page-header">
     <h1>Choose Your Subject</h1>
-    <p>Click any card to open the full study guide for that course.</p>
+    <p>Pick a subject to open its study guide.</p>
   </div>
 
-  <div class="filter-bar">
-    <button class="filter-btn active" data-filter="all">All Subjects</button>
-    <button class="filter-btn" data-filter="math">Math</button>
-    <button class="filter-btn" data-filter="science">Science</button>
-    <button class="filter-btn" data-filter="history">History</button>
-    <button class="filter-btn" data-filter="english">English</button>
-    <button class="filter-btn" data-filter="social">Social Science</button>
-  </div>
-
-  <div class="subjects-grid">
-
-    <!-- AP CALCULUS -->
-    <a href="calculus.html" class="subject-card subject-card-link" data-category="math"
-       style="--card-accent:#2a9d8f;--card-bg:#e8f5f3;">
-      <div class="card-header">
-        <div class="card-icon">📐</div>
-        <div class="card-title-group">
-          <div class="card-title">AP Calculus AB / BC</div>
-          <div class="card-subtitle">Mathematics</div>
-        </div>
-        <span class="difficulty-badge diff-hard">Hard</span>
-      </div>
-      <p class="card-desc">College-level calculus covering limits, derivatives, integrals, and (BC only) series and parametric equations.</p>
-      <div class="card-topics-preview">
-        <span>Limits</span><span>Derivatives</span><span>Integrals</span><span>FTC</span><span>Series (BC)</span>
-      </div>
-      <div class="card-cta">Open Study Guide →</div>
-    </a>
-
-    <!-- AP BIOLOGY -->
-    <a href="biology.html" class="subject-card subject-card-link" data-category="science"
-       style="--card-accent:#57a763;--card-bg:#edf7ee;">
-      <div class="card-header">
-        <div class="card-icon">🧬</div>
-        <div class="card-title-group">
-          <div class="card-title">AP Biology</div>
-          <div class="card-subtitle">Science</div>
-        </div>
-        <span class="difficulty-badge diff-hard">Hard</span>
-      </div>
-      <p class="card-desc">Cell biology, genetics, evolution, and ecology with a focus on scientific reasoning and data interpretation.</p>
-      <div class="card-topics-preview">
-        <span>Cell Structure</span><span>DNA</span><span>Genetics</span><span>Evolution</span><span>Ecology</span>
-      </div>
-      <div class="card-cta">Open Study Guide →</div>
-    </a>
-
-    <!-- AP US HISTORY -->
-    <a href="ushistory.html" class="subject-card subject-card-link" data-category="history"
-       style="--card-accent:#e9a84c;--card-bg:#fef8ee;">
-      <div class="card-header">
-        <div class="card-icon">🇺🇸</div>
-        <div class="card-title-group">
-          <div class="card-title">AP US History</div>
-          <div class="card-subtitle">History & Social Studies</div>
-        </div>
-        <span class="difficulty-badge diff-medium">Medium</span>
-      </div>
-      <p class="card-desc">American history from pre-Columbian times to the present, testing argumentation, causation, and contextualization.</p>
-      <div class="card-topics-preview">
-        <span>Colonial Era</span><span>Revolution</span><span>Civil War</span><span>World Wars</span><span>Civil Rights</span>
-      </div>
-      <div class="card-cta">Open Study Guide →</div>
-    </a>
-
-    <!-- AP EUROPEAN HISTORY -->
-    <a href="euro.html" class="subject-card subject-card-link" data-category="history"
-       style="--card-accent:#7b5ea7;--card-bg:#f3eefb;">
-      <div class="card-header">
-        <div class="card-icon">🏰</div>
-        <div class="card-title-group">
-          <div class="card-title">AP European History</div>
-          <div class="card-subtitle">History & Social Studies</div>
-        </div>
-        <span class="difficulty-badge diff-hard">Hard</span>
-      </div>
-      <p class="card-desc">European history from 1450 to the present — Renaissance, Reformation, revolutions, world wars, and the Cold War.</p>
-      <div class="card-topics-preview">
-        <span>Renaissance</span><span>Reformation</span><span>French Revolution</span><span>WWI & WWII</span><span>Cold War</span>
-      </div>
-      <div class="card-cta">Open Study Guide →</div>
-    </a>
-
-    <!-- AP PSYCHOLOGY -->
-    <a href="psychology.html" class="subject-card subject-card-link" data-category="social"
-       style="--card-accent:#e76f51;--card-bg:#fef0ed;">
-      <div class="card-header">
-        <div class="card-icon">🧠</div>
-        <div class="card-title-group">
-          <div class="card-title">AP Psychology</div>
-          <div class="card-subtitle">Social Science</div>
-        </div>
-        <span class="difficulty-badge diff-medium">Medium</span>
-      </div>
-      <p class="card-desc">Foundations of human behavior and mental processes — from biological bases to social psychology and research methods.</p>
-      <div class="card-topics-preview">
-        <span>Brain & Behavior</span><span>Memory</span><span>Learning</span><span>Development</span><span>Social Psych</span>
-      </div>
-      <div class="card-cta">Open Study Guide →</div>
-    </a>
-
-    <!-- AP ENGLISH LANGUAGE -->
-    <a href="english.html" class="subject-card subject-card-link" data-category="english"
-       style="--card-accent:#c0605a;--card-bg:#faeaea;">
-      <div class="card-header">
-        <div class="card-icon">✍️</div>
-        <div class="card-title-group">
-          <div class="card-title">AP English Language</div>
-          <div class="card-subtitle">English & Writing</div>
-        </div>
-        <span class="difficulty-badge diff-medium">Medium</span>
-      </div>
-      <p class="card-desc">Rhetoric, argumentation, and analytical writing. You'll write synthesis, rhetorical analysis, and argument essays on exam day.</p>
-      <div class="card-topics-preview">
-        <span>Rhetorical Analysis</span><span>Synthesis</span><span>Argument</span><span>Style</span><span>Claims</span>
-      </div>
-      <div class="card-cta">Open Study Guide →</div>
-    </a>
-
+  <div class="pills-container">
+    <a href="calculus.html"  class="subject-pill" data-category="math">📐 AP Calculus</a>
+    <a href="biology.html"   class="subject-pill" data-category="science">🧬 AP Biology</a>
+    <a href="ushistory.html" class="subject-pill" data-category="history">🇺🇸 AP US History</a>
+    <a href="euro.html"      class="subject-pill" data-category="history">🏰 AP European History</a>
+    <a href="psychology.html"class="subject-pill" data-category="social">🧠 AP Psychology</a>
+    <a href="english.html"   class="subject-pill" data-category="english">✍️ AP English Language</a>
   </div>
 
   <footer>
