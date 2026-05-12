@@ -705,12 +705,12 @@ footer strong { color: var(--navy); }
   gap: 24px;
 }
 
-/* Section block */
+/* Section block — more spacious */
 .info-block {
   background: var(--surface);
   border: 1px solid var(--border);
   border-radius: var(--radius-lg);
-  padding: 28px 30px;
+  padding: 36px 38px;
   box-shadow: var(--shadow);
   animation: fadeUp 0.5s var(--ease) both;
   border-left: 4px solid var(--subject-accent, var(--teal));
@@ -718,29 +718,29 @@ footer strong { color: var(--navy); }
 
 .info-block h2 {
   font-family: 'Fraunces', serif;
-  font-size: 1.15rem;
+  font-size: 1.25rem;
   font-weight: 700;
   color: var(--navy);
-  margin-bottom: 16px;
+  margin-bottom: 24px;
   display: flex;
   align-items: center;
-  gap: 9px;
+  gap: 10px;
 }
 
 .info-block h2 .block-icon {
-  width: 30px; height: 30px;
+  width: 34px; height: 34px;
   background: var(--subject-bg, #e8f5f3);
-  border-radius: 8px;
+  border-radius: 9px;
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  font-size: 0.9rem;
+  font-size: 1rem;
 }
 
-/* Topic rows with accent dot */
+/* Topic rows — spacious and easy to scan */
 .topic-row {
-  margin-bottom: 18px;
-  padding-bottom: 18px;
+  margin-bottom: 32px;
+  padding-bottom: 32px;
   border-bottom: 1px solid var(--border);
 }
 
@@ -751,124 +751,130 @@ footer strong { color: var(--navy); }
 }
 
 .topic-row h3 {
-  font-size: 0.95rem;
+  font-family: 'Fraunces', serif;
+  font-size: 1.08rem;
   font-weight: 600;
   color: var(--navy);
-  margin-bottom: 5px;
+  margin-bottom: 12px;
   display: flex;
   align-items: center;
-  gap: 8px;
+  gap: 10px;
 }
 
 .topic-dot {
-  width: 8px; height: 8px;
+  width: 10px; height: 10px;
   border-radius: 50%;
   background: var(--subject-accent, var(--teal));
   flex-shrink: 0;
 }
 
 .topic-row p {
-  font-size: 0.87rem;
+  font-size: 0.96rem;
   color: var(--text-mid);
-  line-height: 1.6;
-  padding-left: 16px;
+  line-height: 1.85;
+  padding-left: 20px;
+  border-left: 3px solid var(--border);
+  margin-top: 4px;
 }
 
-/* Tips list in detail */
+/* Tips list in detail — spacious cards */
 .detail-tips {
   list-style: none;
   display: grid;
-  gap: 10px;
+  gap: 14px;
 }
 
 .detail-tips li {
-  font-size: 0.88rem;
+  font-size: 0.96rem;
   color: var(--text);
-  padding: 12px 14px 12px 40px;
+  padding: 18px 20px 18px 56px;
   background: var(--bg);
-  border-radius: 10px;
+  border: 1px solid var(--border);
+  border-radius: 14px;
   position: relative;
-  line-height: 1.55;
+  line-height: 1.75;
 }
 
 .detail-tips li::before {
   content: attr(data-n);
   position: absolute;
-  left: 12px;
-  width: 20px; height: 20px;
+  left: 16px;
+  top: 18px;
+  width: 26px; height: 26px;
   background: var(--subject-accent, var(--teal));
   color: #fff;
   border-radius: 50%;
-  font-size: 0.68rem;
+  font-size: 0.75rem;
   font-weight: 700;
   display: flex;
   align-items: center;
   justify-content: center;
-  top: 13px;
 }
 
-/* Key terms grid */
+/* Key terms grid — larger and more readable */
 .terms-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
-  gap: 10px;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 14px;
 }
 
 .term-card {
   background: var(--bg);
   border: 1px solid var(--border);
-  border-radius: 10px;
-  padding: 10px 14px;
+  border-radius: 12px;
+  padding: 16px 18px;
 }
 
 .term-card strong {
   display: block;
-  font-size: 0.83rem;
-  font-weight: 600;
+  font-size: 0.92rem;
+  font-weight: 700;
   color: var(--navy);
-  margin-bottom: 3px;
+  margin-bottom: 6px;
 }
 
 .term-card span {
-  font-size: 0.77rem;
+  font-size: 0.85rem;
   color: var(--text-mid);
-  line-height: 1.4;
+  line-height: 1.55;
 }
 
-/* Exam format table */
+/* Exam format table — more breathing room */
 .exam-table {
   width: 100%;
   border-collapse: collapse;
-  font-size: 0.87rem;
+  font-size: 0.93rem;
 }
 
 .exam-table th {
   text-align: left;
-  font-size: 0.72rem;
+  font-size: 0.74rem;
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 0.07em;
   color: var(--text-soft);
-  padding: 0 0 10px;
+  padding: 0 0 12px;
   border-bottom: 1px solid var(--border);
 }
 
 .exam-table td {
-  padding: 11px 0;
+  padding: 16px 0;
   color: var(--text);
   border-bottom: 1px solid var(--border);
   vertical-align: top;
+  line-height: 1.6;
 }
 
 .exam-table tr:last-child td { border-bottom: none; }
 
-.exam-table td:first-child { font-weight: 600; color: var(--navy); width: 48%; }
+.exam-table td:first-child { font-weight: 600; color: var(--navy); width: 46%; padding-right: 20px; }
 
 @media (max-width: 680px) {
   .subject-hero  { padding: 80px 20px 36px; }
   .subject-content { padding: 0 20px 60px; }
-  .info-block { padding: 20px; }
+  .info-block { padding: 24px 20px; }
   .terms-grid { grid-template-columns: 1fr 1fr; }
+  .exam-table td:first-child { padding-right: 12px; }
 }
 
 /* =============================================
