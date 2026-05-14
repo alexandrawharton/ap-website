@@ -294,6 +294,7 @@ img { display: block; max-width: 100%; }
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 10px;
+  margin-top: 24px;
   margin-bottom: 20px;
 }
 .action-btn {
