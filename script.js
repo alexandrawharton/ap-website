@@ -1,23 +1,42 @@
 /* =============================================
    AP Study Hub — script.js
-   Handles: nav, flashcard engine, all card data
+   
+   This file powers all the interactive features
+   on the website including:
+   - Navigation highlighting
+   - Flashcard flipping and tracking
+   - All flashcard content for every subject
    ============================================= */
+
 'use strict';
 
-/* ── NAV ──────────────────────────────────────── */
+/* ── NAVIGATION ───────────────────────────────
+   Highlights the correct nav link based on
+   which page the user is currently on
+─────────────────────────────────────────────── */
 function initNav() {
+  // Get the current page filename from the URL (e.g. "calculus.html")
   const page = window.location.pathname.split('/').pop() || 'index.html';
+
+  // Loop through all nav links and mark the matching one as active
   document.querySelectorAll('.nav-links a').forEach(link => {
     link.classList.toggle('active', link.getAttribute('href') === page);
   });
 }
 
-/* ── FLASHCARD DATA ───────────────────────────── */
+
+/* ── FLASHCARD DATA ───────────────────────────
+   All the flashcard content for every subject.
+   Each deck has a title, accent color, and an
+   array of cards with a front (term) and
+   back (definition/explanation).
+─────────────────────────────────────────────── */
 const DECKS = {
 
+  // ---------- AP CALCULUS DECK ----------
   calculus: {
     title: 'AP Calculus AB / BC',
-    accent: '#0ea5a0',
+    accent: '#0ea5a0', // teal color used for this subject
     cards: [
       { front: 'Power Rule', back: 'd/dx[xⁿ] = nxⁿ⁻¹\nThe exponent comes down and multiplies; reduce the exponent by 1.' },
       { front: 'Chain Rule', back: 'd/dx[f(g(x))] = f′(g(x)) · g′(x)\nDerivative of outside × derivative of inside.' },
@@ -42,9 +61,10 @@ const DECKS = {
     ]
   },
 
+  // ---------- AP BIOLOGY DECK ----------
   biology: {
     title: 'AP Biology',
-    accent: '#22c55e',
+    accent: '#22c55e', // green color used for this subject
     cards: [
       { front: 'Central Dogma', back: 'DNA → (Transcription) → mRNA → (Translation) → Protein\nGenetic information flows in one direction only.' },
       { front: 'Hardy-Weinberg Equation', back: 'p + q = 1 and p² + 2pq + q² = 1\np² = homozygous dominant, 2pq = heterozygous, q² = homozygous recessive.' },
@@ -67,9 +87,10 @@ const DECKS = {
     ]
   },
 
+  // ---------- AP US HISTORY DECK ----------
   ushistory: {
     title: 'AP US History',
-    accent: '#f59e0b',
+    accent: '#f59e0b', // gold/amber color used for this subject
     cards: [
       { front: 'Columbian Exchange', back: 'Transfer of plants, animals, diseases, and ideas between the Americas and Europe/Africa after 1492.\nSmallpox devastated Native populations; crops like potatoes transformed European diets.' },
       { front: 'Salutary Neglect', back: 'Britain loosely enforced trade laws in the colonies during the early 1700s.\nAllowed colonial self-governance to grow — later crackdown caused colonial resentment.' },
@@ -90,9 +111,10 @@ const DECKS = {
     ]
   },
 
+  // ---------- AP EUROPEAN HISTORY DECK ----------
   euro: {
     title: 'AP European History',
-    accent: '#8b5cf6',
+    accent: '#8b5cf6', // purple color used for this subject
     cards: [
       { front: 'Humanism', back: 'Renaissance intellectual movement focusing on human potential, classical texts, and secular life.\nShifted focus from theology to human achievement in art, literature, and philosophy.' },
       { front: 'Protestant Reformation', back: 'Martin Luther\'s 95 Theses (1517) challenged Church authority over salvation.\nKey figures: Luther (justification by faith), Calvin (predestination), Henry VIII (Anglican Church).' },
@@ -113,9 +135,10 @@ const DECKS = {
     ]
   },
 
+  // ---------- AP PSYCHOLOGY DECK ----------
   psychology: {
     title: 'AP Psychology',
-    accent: '#f43f5e',
+    accent: '#f43f5e', // red/rose color used for this subject
     cards: [
       { front: 'Classical Conditioning', back: 'Learning by association: pair a neutral stimulus (CS) with one that causes a response (US).\nPavlov: bell (CS) + food (US) → salivation (UR) → bell alone → salivation (CR).' },
       { front: 'Operant Conditioning', back: 'Learning through consequences (Skinner).\nReinforcement increases behavior; punishment decreases behavior.' },
@@ -138,9 +161,10 @@ const DECKS = {
     ]
   },
 
+  // ---------- AP ENGLISH LANGUAGE DECK ----------
   english: {
     title: 'AP English Language',
-    accent: '#f43f5e',
+    accent: '#f43f5e', // red/rose color used for this subject
     cards: [
       { front: 'Ethos', back: 'Rhetorical appeal to credibility or authority.\nAuthor establishes trust by citing expertise, credentials, or shared values with the audience.' },
       { front: 'Logos', back: 'Rhetorical appeal to logic and reason.\nUses facts, statistics, data, and rational argument structure to persuade.' },
@@ -163,68 +187,101 @@ const DECKS = {
 
 };
 
-/* ── FLASHCARD ENGINE ────────────────────────── */
-let currentDeck = [];
-let currentIndex = 0;
-let isFlipped = false;
-let knownCards = new Set();
-let unknownCards = new Set();
 
+/* ── FLASHCARD STATE ──────────────────────────
+   These variables keep track of what's happening
+   in the flashcard session at any given moment
+─────────────────────────────────────────────── */
+let currentDeck  = [];    // The active list of cards being studied
+let currentIndex = 0;     // Which card the user is currently on
+let isFlipped    = false; // Whether the card is showing the front or back
+let knownCards   = new Set();   // Cards the user marked as "Got It"
+let unknownCards = new Set();   // Cards the user marked as "Still Learning"
+
+
+/* ── FLASHCARD SETUP ──────────────────────────
+   Runs when the flashcard page loads.
+   Reads the URL to find which subject was chosen,
+   then loads that subject's deck.
+─────────────────────────────────────────────── */
 function initFlashcards() {
-  const params = new URLSearchParams(window.location.search);
+  // Read the "?subject=calculus" part of the URL
+  const params  = new URLSearchParams(window.location.search);
   const subject = params.get('subject');
-  const deck = DECKS[subject];
+  const deck    = DECKS[subject];
 
+  // If the subject doesn't exist, stop here
   if (!deck) {
     document.getElementById('fc-title').textContent = 'Deck not found';
     return;
   }
 
-  // Set accent color
+  // Apply the subject's accent color to the page
   document.documentElement.style.setProperty('--subject-accent', deck.accent);
 
-  // Set title
+  // Set the page title to the subject name
   document.getElementById('fc-title').textContent = deck.title;
-  document.getElementById('fc-back-link').href =
-    subject + '.html';
 
-  currentDeck = [...deck.cards];
+  // Make the back link return to the correct subject page
+  document.getElementById('fc-back-link').href = subject + '.html';
+
+  // Load the cards into the current deck
+  currentDeck  = [...deck.cards];
   currentIndex = 0;
-  isFlipped = false;
+  isFlipped    = false;
 
+  // Show the first card
   renderCard();
   updateProgress();
 }
 
+
+/* ── RENDER CARD ──────────────────────────────
+   Displays the current card on screen.
+   Shows the front (term) and pre-loads the back
+   (definition) so it's ready when the user flips.
+─────────────────────────────────────────────── */
 function renderCard() {
   const card = currentDeck[currentIndex];
   if (!card) return;
 
+  // Fill in the front and back text
   const front = document.getElementById('fc-front-text');
   const back  = document.getElementById('fc-back-text');
-
   front.textContent = card.front;
-  // Replace \n with line breaks
+
+  // Convert line breaks (\n) in the back text into actual HTML line breaks
   back.innerHTML = card.back.split('\n').map(line =>
     `<span>${line}</span>`
   ).join('<br>');
 
-  // Reset flip state
+  // Reset the card to show the front (un-flip it)
   const cardEl = document.getElementById('fc-card');
   cardEl.classList.remove('flipped');
   isFlipped = false;
 
+  // Update the progress bar and counter
   updateProgress();
   updateNavButtons();
 }
 
+
+/* ── FLIP CARD ────────────────────────────────
+   Toggles the card between front and back
+   using a CSS class that triggers the 3D flip animation
+─────────────────────────────────────────────── */
 function flipCard() {
   const cardEl = document.getElementById('fc-card');
-  cardEl.classList.toggle('flipped');
+  cardEl.classList.toggle('flipped'); // CSS handles the animation
   isFlipped = !isFlipped;
 }
 
+
+/* ── NAVIGATION ───────────────────────────────
+   Moves forward or backward through the deck
+─────────────────────────────────────────────── */
 function nextCard() {
+  // Only go forward if there are more cards ahead
   if (currentIndex < currentDeck.length - 1) {
     currentIndex++;
     renderCard();
@@ -232,31 +289,49 @@ function nextCard() {
 }
 
 function prevCard() {
+  // Only go back if we're not already on the first card
   if (currentIndex > 0) {
     currentIndex--;
     renderCard();
   }
 }
 
+
+/* ── MARK KNOWN / UNKNOWN ─────────────────────
+   Lets the user track which cards they know.
+   Updates the score display and moves to the next card.
+─────────────────────────────────────────────── */
 function markKnown() {
+  // Add to "known" set and remove from "unknown" if it was there
   knownCards.add(currentIndex);
   unknownCards.delete(currentIndex);
   updateScore();
+  // Automatically advance to the next card
   if (currentIndex < currentDeck.length - 1) nextCard();
 }
 
 function markUnknown() {
+  // Add to "unknown" set and remove from "known" if it was there
   unknownCards.add(currentIndex);
   knownCards.delete(currentIndex);
   updateScore();
+  // Automatically advance to the next card
   if (currentIndex < currentDeck.length - 1) nextCard();
 }
 
+
+/* ── SHUFFLE DECK ─────────────────────────────
+   Randomly reorders the cards using the
+   Fisher-Yates shuffle algorithm, then resets
+   the session from the beginning
+─────────────────────────────────────────────── */
 function shuffleDeck() {
+  // Loop backwards through the array, swapping each card with a random earlier card
   for (let i = currentDeck.length - 1; i > 0; i--) {
     const j = Math.floor(Math.random() * (i + 1));
     [currentDeck[i], currentDeck[j]] = [currentDeck[j], currentDeck[i]];
   }
+  // Reset to the start and clear the score
   currentIndex = 0;
   knownCards.clear();
   unknownCards.clear();
@@ -264,10 +339,16 @@ function shuffleDeck() {
   renderCard();
 }
 
+
+/* ── RESTART DECK ─────────────────────────────
+   Resets the deck back to the original order
+   and clears the score so the user can start fresh
+─────────────────────────────────────────────── */
 function restartDeck() {
-  const params = new URLSearchParams(window.location.search);
+  const params  = new URLSearchParams(window.location.search);
   const subject = params.get('subject');
-  currentDeck = [...DECKS[subject].cards];
+  // Reload the original unshuffled cards from the DECKS data
+  currentDeck  = [...DECKS[subject].cards];
   currentIndex = 0;
   knownCards.clear();
   unknownCards.clear();
@@ -275,13 +356,27 @@ function restartDeck() {
   renderCard();
 }
 
+
+/* ── UPDATE PROGRESS ──────────────────────────
+   Updates the card counter (e.g. "3 / 18")
+   and fills the progress bar at the top
+─────────────────────────────────────────────── */
 function updateProgress() {
   const counter = document.getElementById('fc-counter');
   const bar     = document.getElementById('fc-bar');
+
+  // Show current card number out of total
   if (counter) counter.textContent = `${currentIndex + 1} / ${currentDeck.length}`;
+
+  // Fill the bar as a percentage of how far through the deck we are
   if (bar) bar.style.width = `${((currentIndex + 1) / currentDeck.length) * 100}%`;
 }
 
+
+/* ── UPDATE NAV BUTTONS ───────────────────────
+   Disables the Prev button on the first card
+   and the Next button on the last card
+─────────────────────────────────────────────── */
 function updateNavButtons() {
   const prevBtn = document.getElementById('fc-prev');
   const nextBtn = document.getElementById('fc-next');
@@ -289,6 +384,11 @@ function updateNavButtons() {
   if (nextBtn) nextBtn.disabled = currentIndex === currentDeck.length - 1;
 }
 
+
+/* ── UPDATE SCORE ─────────────────────────────
+   Shows the live count of how many cards
+   the user has marked as known vs still learning
+─────────────────────────────────────────────── */
 function updateScore() {
   const scoreEl = document.getElementById('fc-score');
   if (scoreEl) {
@@ -296,10 +396,17 @@ function updateScore() {
   }
 }
 
-/* ── BOOT ─────────────────────────────────────── */
+
+/* ── BOOT / PAGE LOAD ─────────────────────────
+   This runs as soon as the page finishes loading.
+   It initializes the nav and, if we're on the
+   flashcards page, starts the flashcard engine.
+─────────────────────────────────────────────── */
 document.addEventListener('DOMContentLoaded', () => {
+  // Always highlight the correct nav link
   initNav();
-  // Only init flashcards if on the flashcards page
+
+  // Only run flashcard setup if the flashcard element exists on this page
   if (document.getElementById('fc-card')) {
     initFlashcards();
   }
