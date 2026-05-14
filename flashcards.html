@@ -1,4 +1,11 @@
 <!DOCTYPE html>
+<!-- ============================================================
+     flashcards.html — INTERACTIVE FLASHCARD PAGE
+     This page is shared by all 6 subjects.
+     It reads the URL (e.g. ?subject=calculus) to figure out
+     which deck to load, then displays the cards one at a time.
+     All the card data and logic lives in script.js.
+     ============================================================ -->
 <html lang="en">
 <head>
   <meta charset="UTF-8"/>
@@ -16,11 +23,16 @@
   </ul>
 </nav>
 
+<!-- Back link — JavaScript updates this href to go back to the correct subject page -->
 <a id="fc-back-link" href="study.html" class="back-link">← Back to Study Guide</a>
 
+<!-- Main content wrapper — keeps cards centered on screen -->
 <div class="fc-page">
 
-  <!-- Header -->
+  <!-- ── HEADER ────────────────────────────────────────────
+       Shows the subject name, current card number (e.g. 3/18),
+       and the live score (how many known vs still learning)
+  ─────────────────────────────────────────────────────────── -->
   <div class="fc-header">
     <h1 id="fc-title">Flashcards</h1>
     <div class="fc-meta-row">
@@ -29,12 +41,18 @@
     </div>
   </div>
 
-  <!-- Progress bar -->
+  <!-- ── PROGRESS BAR ───────────────────────────────────────
+       A thin bar that fills up as the student moves through cards
+  ─────────────────────────────────────────────────────────── -->
   <div class="fc-progress">
     <div class="fc-progress-bar" id="fc-bar"></div>
   </div>
 
-  <!-- Card (click to flip) -->
+  <!-- ── FLASHCARD ─────────────────────────────────────────
+       The 3D card with two sides — front (term) and back (answer).
+       Clicking anywhere on the card triggers the flip animation.
+       The CSS handles the actual 3D rotation effect.
+  ─────────────────────────────────────────────────────────── -->
   <div class="fc-scene" onclick="flipCard()">
     <div class="fc-card" id="fc-card">
 
@@ -52,20 +70,29 @@
     </div>
   </div>
 
-  <!-- Know it / Still learning -->
+  <!-- ── SELF-GRADING BUTTONS ──────────────────────────────
+       Lets the student mark each card as known or still learning.
+       Updates the score display and moves to the next card.
+  ─────────────────────────────────────────────────────────── -->
   <div class="fc-controls">
     <button class="fc-btn unknown" onclick="markUnknown()">✗ Still Learning</button>
     <button class="fc-btn known"   onclick="markKnown()">✓ Got It</button>
   </div>
 
-  <!-- Prev / Flip / Next -->
+  <!-- ── NAVIGATION CONTROLS ────────────────────────────────
+       Prev/Next move through the deck.
+       Flip button does the same as clicking the card.
+  ─────────────────────────────────────────────────────────── -->
   <div class="fc-nav-row">
     <button class="fc-btn" id="fc-prev" onclick="prevCard()">← Prev</button>
     <button class="fc-flip-btn"         onclick="flipCard()">🔄 Flip</button>
     <button class="fc-btn" id="fc-next" onclick="nextCard()">Next →</button>
   </div>
 
-  <!-- Shuffle / Restart -->
+  <!-- ── UTILITY BUTTONS ────────────────────────────────────
+       Shuffle randomly reorders the deck.
+       Restart resets to the original order and clears the score.
+  ─────────────────────────────────────────────────────────── -->
   <div class="fc-util-row">
     <button class="fc-util-btn" onclick="shuffleDeck()">🔀 Shuffle</button>
     <button class="fc-util-btn" onclick="restartDeck()">↩ Restart</button>

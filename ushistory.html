@@ -1,10 +1,22 @@
 <!DOCTYPE html>
+<!-- ============================================================
+     ushistory.html — AP US HISTORY STUDY GUIDE
+     Study guide for AP US History. Shows exam info, action buttons
+     (Flashcards, FRQs, Video), and the 9 APUSH periods as core topics.
+     Each subject page follows the same structure:
+       1. Navigation bar
+       2. Back link to subject selection
+       3. Unit header (title + exam info tags)
+       4. Action buttons (links to flashcards, FRQs, video)
+       5. Core topics section in a card container
+     ============================================================ -->
 <html lang="en">
 <head>
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
   <title>AP US History — AP Study Hub</title>
   <link rel="stylesheet" href="style.css"/>
+  <!-- Sets the accent color unique to this subject (used for dots, borders, etc.) -->
   <style>:root { --subject-accent: #f59e0b; }</style>
 </head>
 <body>
@@ -17,8 +29,10 @@
   </ul>
 </nav>
 
+<!-- Back link — returns the user to the subject selection page -->
 <a href="study.html" class="back-link">← Back</a>
 
+<!-- Main content wrapper — keeps everything centered and max-width constrained -->
 <div class="study-page">
 
   <div class="unit-header">
@@ -53,6 +67,7 @@
   </div>
 </div>
 
+<!-- ── FOOTER ──────────────────────────────────────────── -->
 <footer><strong>AP Study Hub</strong> · Content aligned with College Board standards</footer>
 <script src="script.js"></script>
 </body>

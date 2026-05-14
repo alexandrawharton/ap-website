@@ -1,4 +1,13 @@
 <!DOCTYPE html>
+<!-- ============================================================
+     frqs.html — FREE RESPONSE QUESTION PRACTICE PAGE
+     This page is shared by all 6 subjects.
+     It reads the URL (e.g. ?subject=ushistory) to load the
+     correct FRQ prompts. Students write their answer, then click
+     "Get Feedback" which opens ChatGPT with their answer and the
+     grading prompt already filled in so AI can grade it.
+     All FRQ data and submit logic is in the <script> at the bottom.
+     ============================================================ -->
 <html lang="en">
 <head>
   <meta charset="UTF-8"/>
@@ -16,20 +25,32 @@
   </ul>
 </nav>
 
+<!-- Back link — JavaScript updates this to return to the correct subject page -->
 <a id="frq-back-link" href="study.html" class="back-link">← Back to Study Guide</a>
 
+<!-- Main content wrapper — keeps everything centered -->
 <div class="frq-page">
 
-  <!-- Header -->
+  <!-- ── HEADER ────────────────────────────────────────────
+       Shows the subject name and brief instructions for the student
+  ─────────────────────────────────────────────────────────── -->
   <div class="frq-header">
     <h1 id="frq-title">FRQ Practice</h1>
     <p>Write your answer in the box below, then click <strong>Get Feedback</strong> to be graded by AI.</p>
   </div>
 
-  <!-- FRQ selector tabs -->
+  <!-- ── FRQ SELECTOR TABS ─────────────────────────────────
+       Buttons that let the student switch between different FRQ prompts.
+       JavaScript fills these in based on the subject's data.
+  ─────────────────────────────────────────────────────────── -->
   <div class="frq-tabs" id="frq-tabs"></div>
 
-  <!-- Prompt card -->
+  <!-- ── PROMPT CARD ──────────────────────────────────────
+       Displays the selected FRQ question.
+       Includes: the context/background, the main question,
+       and the individual parts (a), (b), (c) etc.
+       JavaScript populates all of this dynamically.
+  ─────────────────────────────────────────────────────────── -->
   <div class="frq-prompt-card" id="frq-prompt-card">
     <div class="frq-prompt-header">
       <h3 id="frq-prompt-title">Question</h3>
@@ -42,7 +63,10 @@
     </div>
   </div>
 
-  <!-- Answer box -->
+  <!-- ── ANSWER TEXT BOX ───────────────────────────────────
+       Where the student types their response.
+       Includes a live word counter and the submit button.
+  ─────────────────────────────────────────────────────────── -->
   <div class="frq-answer-section">
     <div class="frq-answer-header">
       <h3>Your Answer</h3>
@@ -394,6 +418,7 @@ document.addEventListener('DOMContentLoaded', () => {
   selectPrompt(0);
 });
 
+// Switches to a different FRQ when the student clicks a tab button
 function selectPrompt(index) {
   currentPromptIndex = index;
   const data   = FRQ_DATA[currentSubject];
@@ -433,6 +458,7 @@ function selectPrompt(index) {
   document.getElementById('frq-submit-btn').disabled = false;
 }
 
+// Updates the live word counter as the student types
 function updateWordCount() {
   const text  = document.getElementById('frq-textarea').value.trim();
   const words = text ? text.split(/\s+/).length : 0;
@@ -440,6 +466,10 @@ function updateWordCount() {
 }
 
 /* ── SUBMIT & GRADE ─────────────────────────── */
+// ── SUBMIT HANDLER ───────────────────────────────────────
+// Runs when the student clicks "Get Feedback".
+// Builds a grading prompt combining the FRQ question, rubric,
+// and the student's answer, then opens ChatGPT with it pre-filled.
 function submitFRQ() {
   const answer = document.getElementById('frq-textarea').value.trim();
   if (answer.length < 20) {

@@ -1,13 +1,84 @@
 <!DOCTYPE html>
+<!-- ============================================================
+     study.html — SUBJECT SELECTION PAGE
+     This page shows all 6 AP subjects as clickable pill buttons.
+     When a student clicks a subject, they go to that subject's
+     individual study guide page.
+     ============================================================ -->
 <html lang="en">
 <head>
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
   <title>Choose Your Subject — AP Study Hub</title>
+
+  <!-- Link to the shared stylesheet -->
   <link rel="stylesheet" href="style.css"/>
+
+  <style>
+    /* ── INLINE GRID STYLES ─────────────────────────────────
+       These styles are written directly in the HTML (not just
+       in style.css) to make sure the grid layout always works,
+       even if the browser has cached an older version of style.css.
+       The !important flags ensure these rules always win.
+    ──────────────────────────────────────────────────────── */
+
+    /* Layout: 3 pill buttons per row on desktop */
+    .pills-container {
+      display: grid !important;
+      grid-template-columns: repeat(3, 1fr) !important;
+      gap: 14px !important;
+      max-width: 680px !important;
+      margin: 0 auto 80px !important;
+      padding: 0 20px !important;
+    }
+
+    /* Style for each individual subject pill button */
+    .subject-pill {
+      display: flex !important;
+      align-items: center !important;
+      justify-content: center !important;
+      text-align: center !important;
+      gap: 8px !important;
+      background: #ffffff !important;
+      border: 1.5px solid #e5e7eb !important;
+      border-radius: 14px !important;
+      padding: 20px 16px !important;
+      font-size: 0.95rem !important;
+      font-weight: 600 !important;
+      color: #1a2e4a !important;
+      text-decoration: none !important;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.08) !important;
+      transition: all 0.2s ease !important;
+      min-height: 64px !important;
+    }
+
+    /* Hover effect — pill turns dark navy when mouse hovers over it */
+    .subject-pill:hover {
+      background: #1a2e4a !important;
+      color: #ffffff !important;
+      border-color: #1a2e4a !important;
+      transform: translateY(-2px) !important;
+    }
+
+    /* On tablets/small screens: switch to 2 columns */
+    @media (max-width: 540px) {
+      .pills-container {
+        grid-template-columns: repeat(2, 1fr) !important;
+        gap: 10px !important;
+      }
+    }
+
+    /* On very small phones: switch to 1 column */
+    @media (max-width: 320px) {
+      .pills-container {
+        grid-template-columns: 1fr !important;
+      }
+    }
+  </style>
 </head>
 <body>
 
+  <!-- ── NAVIGATION BAR ─────────────────────────────────── -->
   <nav class="nav">
     <div class="nav-logo"><span>AP</span> Study Hub</div>
     <ul class="nav-links">
@@ -16,25 +87,34 @@
     </ul>
   </nav>
 
+  <!-- ── PAGE HEADER ────────────────────────────────────────
+       Simple heading that tells the user what to do
+  ─────────────────────────────────────────────────────────── -->
   <div class="page-header">
     <h1>Choose Your Subject</h1>
     <p>Pick a subject to open its study guide.</p>
   </div>
 
+  <!-- ── SUBJECT PILLS ──────────────────────────────────────
+       Each pill is a link to a different subject study guide.
+       Clicking one takes the student directly to that page.
+  ─────────────────────────────────────────────────────────── -->
   <div class="pills-container">
-    <a href="calculus.html"  class="subject-pill" data-category="math">📐 AP Calculus</a>
-    <a href="biology.html"   class="subject-pill" data-category="science">🧬 AP Biology</a>
-    <a href="ushistory.html" class="subject-pill" data-category="history">🇺🇸 AP US History</a>
-    <a href="euro.html"      class="subject-pill" data-category="history">🏰 AP European History</a>
-    <a href="psychology.html"class="subject-pill" data-category="social">🧠 AP Psychology</a>
-    <a href="english.html"   class="subject-pill" data-category="english">✍️ AP English Language</a>
+    <a href="calculus.html"   class="subject-pill">📐 AP Calculus</a>
+    <a href="biology.html"    class="subject-pill">🧬 AP Biology</a>
+    <a href="ushistory.html"  class="subject-pill">🇺🇸 AP US History</a>
+    <a href="euro.html"       class="subject-pill">🏰 AP European History</a>
+    <a href="psychology.html" class="subject-pill">🧠 AP Psychology</a>
+    <a href="english.html"    class="subject-pill">✍️ AP English Language</a>
   </div>
 
+  <!-- ── FOOTER ─────────────────────────────────────────── -->
   <footer>
     <strong>AP Study Hub</strong> · Built for students, by students ·
     Content aligned with College Board standards
   </footer>
 
+  <!-- Load the shared JavaScript file -->
   <script src="script.js"></script>
 </body>
 </html>

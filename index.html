@@ -1,14 +1,25 @@
 <!DOCTYPE html>
+<!-- ============================================================
+     index.html — HOME PAGE
+     This is the first page users see when they visit the site.
+     It shows a welcome message and a big "Start Studying" button
+     that takes them to the subject selection page.
+     ============================================================ -->
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>AP Study Hub — Ace Your Exams</title>
+
+  <!-- Link to the shared stylesheet that styles the whole site -->
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
 
-  <!-- ── NAVIGATION ─────────────────────────────── -->
+  <!-- ── NAVIGATION BAR ─────────────────────────────────────
+       The sticky top bar that appears on every page.
+       Contains the site logo and links to Home and Study.
+  ─────────────────────────────────────────────────────────── -->
   <nav class="nav">
     <div class="nav-logo">
       <span>AP</span>
@@ -20,21 +31,26 @@
     </ul>
   </nav>
 
-  <!-- ── HERO ───────────────────────────────────── -->
+  <!-- ── HERO SECTION ───────────────────────────────────────
+       The large centered section that fills the screen.
+       Contains the main headline, the Start Studying button,
+       and three quick stats about the site.
+  ─────────────────────────────────────────────────────────── -->
   <section class="hero">
 
+    <!-- Main headline — the first thing users read -->
     <h1 class="hero-title">
       Study less.<br>
       Score <em>higher</em>.
     </h1>
 
-    <!-- Primary CTA -->
+    <!-- Primary call-to-action button — sends users to the study page -->
     <a href="study.html" class="btn-primary">
       Start Studying
       <span class="btn-arrow">→</span>
     </a>
 
-    <!-- Stats row (restored) -->
+    <!-- Quick stats row showing what the site offers -->
     <div class="hero-stats">
       <div class="stat">
         <span class="stat-num">5</span>
@@ -52,12 +68,15 @@
 
   </section>
 
-  <!-- ── FOOTER ──────────────────────────────────── -->
+  <!-- ── FOOTER ─────────────────────────────────────────────
+       Simple footer shown at the bottom of every page
+  ─────────────────────────────────────────────────────────── -->
   <footer>
     <strong>AP Study Hub</strong> · Built for students, by students ·
     Content aligned with College Board standards
   </footer>
 
+  <!-- Load the shared JavaScript file -->
   <script src="script.js"></script>
 </body>
 </html>

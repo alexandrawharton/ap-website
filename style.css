@@ -1,11 +1,29 @@
 /* =============================================
-   AP Study Hub — style.css  (v4 redesign)
-   Mobile-first · Clean · Fast · Modern
+   AP Study Hub — style.css
+
+   This single file styles the ENTIRE website.
+   All pages (index, study, subject guides,
+   flashcards, FRQs) share these styles.
+
+   Sections in this file:
+   1. CSS Variables (color palette & spacing)
+   2. Reset (removes default browser styles)
+   3. Navigation bar
+   4. Home page hero section
+   5. Study selection page (pills)
+   6. Subject study guide pages
+   7. Flashcard page
+   8. FRQ practice page
+   9. Responsive / mobile styles
    ============================================= */
 
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
 
-/* --- Variables --- */
+/* ── CSS VARIABLES ─────────────────────────────
+   Define all colors and sizes in one place.
+   Changing a value here updates it everywhere
+   on the site automatically.
+─────────────────────────────────────────────── */
 :root {
   --bg:       #f8f8f6;
   --surface:  #ffffff;
@@ -33,7 +51,11 @@
   --t:        0.2s var(--ease);
 }
 
-/* --- Reset --- */
+/* ── RESET ──────────────────────────────────────
+   Removes default margins, padding, and box-sizing
+   that browsers add automatically. Gives us a clean
+   slate to work with.
+─────────────────────────────────────────────── */
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 html { scroll-behavior: smooth; }
 body {
@@ -49,7 +71,9 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
 img { display: block; max-width: 100%; }
 
 /* =============================================
-   NAV
+   NAVIGATION BAR
+   The sticky bar fixed to the top of every page.
+   Uses backdrop-filter blur for a frosted glass look.
    ============================================= */
 .nav {
   position: sticky; top: 0; z-index: 100;
@@ -85,7 +109,10 @@ img { display: block; max-width: 100%; }
 }
 
 /* =============================================
-   HOME PAGE
+   HOME PAGE — HERO SECTION
+   The full-screen welcome section on index.html.
+   Has a subtle dot-grid background pattern,
+   a large headline, and the Start Studying button.
    ============================================= */
 .hero {
   min-height: 100vh;
@@ -146,7 +173,9 @@ img { display: block; max-width: 100%; }
 }
 
 /* =============================================
-   STUDY SELECTION PAGE
+   STUDY SELECTION PAGE (study.html)
+   Styles for the page header, filter buttons,
+   and the grid of subject pill buttons.
    ============================================= */
 .page-header {
   padding: 80px 20px 24px;
@@ -211,7 +240,11 @@ img { display: block; max-width: 100%; }
 }
 
 /* =============================================
-   SUBJECT STUDY PAGE
+   SUBJECT STUDY GUIDE PAGES
+   Styles shared by all 6 subject pages
+   (calculus, biology, ushistory, euro, etc.)
+   Includes: unit header, action buttons,
+   topic list grid, and section cards.
    ============================================= */
 
 /* Back link */
@@ -500,7 +533,11 @@ footer strong { color: var(--navy); }
 }
 
 /* =============================================
-   FLASHCARD PAGE
+   FLASHCARD PAGE (flashcards.html)
+   Styles for the 3D flip card, progress bar,
+   navigation buttons, and score display.
+   The flip animation uses CSS 3D transforms —
+   rotating the card 180 degrees on the Y axis.
    ============================================= */
 
 .fc-page {
@@ -728,7 +765,10 @@ footer strong { color: var(--navy); }
 }
 
 /* =============================================
-   FRQ PAGE
+   FRQ PRACTICE PAGE (frqs.html)
+   Styles for the question prompt card,
+   the answer text box, the submit button,
+   and the AI feedback result display.
    ============================================= */
 
 .frq-page {
