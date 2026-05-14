@@ -1,0 +1,491 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+  <title>FRQ Practice — AP Study Hub</title>
+  <link rel="stylesheet" href="style.css"/>
+</head>
+<body>
+
+<nav class="nav">
+  <div class="nav-logo"><span>AP</span> Study Hub</div>
+  <ul class="nav-links">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="study.html">Study</a></li>
+  </ul>
+</nav>
+
+<a id="frq-back-link" href="study.html" class="back-link">← Back to Study Guide</a>
+
+<div class="frq-page">
+
+  <!-- Header -->
+  <div class="frq-header">
+    <h1 id="frq-title">FRQ Practice</h1>
+    <p>Write your answer in the box below, then click <strong>Get Feedback</strong> to be graded by AI.</p>
+  </div>
+
+  <!-- FRQ selector tabs -->
+  <div class="frq-tabs" id="frq-tabs"></div>
+
+  <!-- Prompt card -->
+  <div class="frq-prompt-card" id="frq-prompt-card">
+    <div class="frq-prompt-header">
+      <h3 id="frq-prompt-title">Question</h3>
+      <span class="frq-difficulty" id="frq-difficulty"></span>
+    </div>
+    <div class="frq-prompt-body">
+      <div class="frq-context" id="frq-context" style="display:none"></div>
+      <div class="frq-question" id="frq-question"></div>
+      <ul class="frq-parts" id="frq-parts"></ul>
+    </div>
+  </div>
+
+  <!-- Answer box -->
+  <div class="frq-answer-section">
+    <div class="frq-answer-header">
+      <h3>Your Answer</h3>
+      <span class="frq-word-count" id="frq-word-count">0 words</span>
+    </div>
+    <textarea
+      class="frq-textarea"
+      id="frq-textarea"
+      placeholder="Write your full response here. Be specific — use course vocabulary and support your claims with evidence…"
+    ></textarea>
+    <div class="frq-submit-row">
+      <span class="frq-hint">💡 Write at least 2–3 sentences per part, then click Grade — ChatGPT opens with your answer ready</span>
+      <button class="frq-submit-btn" id="frq-submit-btn" onclick="submitFRQ()">
+        ✦ Get Feedback
+      </button>
+    </div>
+  </div>
+
+  Grading your response…
+  </div>
+
+</div>
+
+<footer><strong>AP Study Hub</strong> · Content aligned with College Board standards</footer>
+<script src="script.js"></script>
+<script>
+/* ── FRQ DATA ─────────────────────────────────── */
+const FRQ_DATA = {
+
+  calculus: {
+    title: 'AP Calculus AB / BC',
+    accent: '#0ea5a0',
+    prompts: [
+      {
+        id: 1,
+        title: 'FRQ 1 — Derivatives & Applications',
+        difficulty: 'AB/BC',
+        context: 'Let f be a function defined by f(x) = x³ − 3x² + 2.',
+        question: 'Answer all parts using calculus methods. Show all work.',
+        parts: [
+          { label: '(a)', text: 'Find f\'(x) and determine all critical points of f.' },
+          { label: '(b)', text: 'Determine the intervals on which f is increasing and decreasing. Justify your answer.' },
+          { label: '(c)', text: 'Find f\'\'(x) and identify any inflection points. Justify using the second derivative.' },
+          { label: '(d)', text: 'Find the absolute maximum and minimum of f on the interval [0, 3].' },
+        ],
+        rubric: 'Award points for: correct derivative (a), correct intervals with justification (b), correct second derivative and inflection point (c), correct evaluation at endpoints and critical points (d).'
+      },
+      {
+        id: 2,
+        title: 'FRQ 2 — Integrals & Area',
+        difficulty: 'AB/BC',
+        context: 'Let R be the region enclosed by f(x) = x² and g(x) = 2x.',
+        question: 'Answer all parts. Justify each answer.',
+        parts: [
+          { label: '(a)', text: 'Find the x-coordinates of the points where f and g intersect.' },
+          { label: '(b)', text: 'Write, but do not evaluate, an integral expression for the area of region R.' },
+          { label: '(c)', text: 'Find the area of region R.' },
+          { label: '(d)', text: 'Write an integral for the volume of the solid formed when R is revolved about the x-axis.' },
+        ],
+        rubric: 'Award points for: correct intersection points (a), correct integrand and limits (b), correct evaluated area (c), correct volume setup using disk/washer method (d).'
+      },
+      {
+        id: 3,
+        title: 'FRQ 3 — Differential Equations',
+        difficulty: 'AB/BC',
+        context: 'A population P grows according to dP/dt = 0.2P, where P is in thousands and t is in years.',
+        question: 'Answer all parts.',
+        parts: [
+          { label: '(a)', text: 'Solve the differential equation with initial condition P(0) = 5.' },
+          { label: '(b)', text: 'Find the population after 3 years. Round to the nearest hundred.' },
+          { label: '(c)', text: 'Sketch a slope field for dP/dt = 0.2P and describe what it shows about solutions.' },
+        ],
+        rubric: 'Award points for: correct separation and integration (a), correct numerical answer (b), correct slope field sketch and description of exponential growth behavior (c).'
+      },
+    ]
+  },
+
+  biology: {
+    title: 'AP Biology',
+    accent: '#22c55e',
+    prompts: [
+      {
+        id: 1,
+        title: 'FRQ 1 — Cellular Respiration',
+        difficulty: 'Long FRQ',
+        context: 'A researcher measures ATP production in yeast cells under aerobic and anaerobic conditions at different glucose concentrations.',
+        question: 'Use your knowledge of cellular respiration to answer all parts.',
+        parts: [
+          { label: '(a)', text: 'Describe the role of glycolysis in both aerobic and anaerobic respiration. Include inputs, outputs, and location.' },
+          { label: '(b)', text: 'Explain why aerobic respiration produces significantly more ATP than anaerobic respiration.' },
+          { label: '(c)', text: 'Predict what would happen to ATP production if the inner mitochondrial membrane were disrupted. Justify your prediction.' },
+          { label: '(d)', text: 'The researcher observes that ATP production plateaus at high glucose concentrations. Propose a biological explanation for this observation.' },
+        ],
+        rubric: 'Award points for: accurate glycolysis description with location/inputs/outputs (a), ETC and chemiosmosis explanation (b), logical disruption prediction tied to H+ gradient (c), enzyme saturation or carrier protein limitation (d).'
+      },
+      {
+        id: 2,
+        title: 'FRQ 2 — Genetics & Hardy-Weinberg',
+        difficulty: 'Long FRQ',
+        context: 'In a population of 1,000 birds, 160 show the recessive phenotype (white feathers). The population is in Hardy-Weinberg equilibrium.',
+        question: 'Answer all parts. Show all calculations.',
+        parts: [
+          { label: '(a)', text: 'Calculate the allele frequencies p and q for this population.' },
+          { label: '(b)', text: 'Calculate the expected number of heterozygous individuals in this population.' },
+          { label: '(c)', text: 'State all five conditions required for Hardy-Weinberg equilibrium.' },
+          { label: '(d)', text: 'Suppose a disease kills all white-feathered birds. Explain how this violates Hardy-Weinberg and what will happen to allele frequencies over time.' },
+        ],
+        rubric: 'Award points for: q²=0.16, q=0.4, p=0.6 (a), 2pq×1000=480 (b), all 5 conditions listed (c), identifies natural selection as violation + directional selection reducing q (d).'
+      },
+      {
+        id: 3,
+        title: 'FRQ 3 — Evolution & Natural Selection',
+        difficulty: 'Short FRQ',
+        context: null,
+        question: 'Answer all parts using evidence-based reasoning.',
+        parts: [
+          { label: '(a)', text: 'Explain the three requirements for natural selection to occur in a population.' },
+          { label: '(b)', text: 'Distinguish between genetic drift and natural selection as mechanisms of evolution.' },
+          { label: '(c)', text: 'A new antibiotic kills 99% of a bacterial population. Explain why the surviving bacteria and their offspring are likely to be antibiotic-resistant.' },
+        ],
+        rubric: 'Award points for: variation + heritability + differential reproduction (a), genetic drift = random, natural selection = non-random adaptive (b), pre-existing resistance selected for, not caused by antibiotic (c).'
+      },
+    ]
+  },
+
+  ushistory: {
+    title: 'AP US History',
+    accent: '#f59e0b',
+    prompts: [
+      {
+        id: 1,
+        title: 'DBQ — Reconstruction Era',
+        difficulty: 'DBQ',
+        context: 'Evaluate the extent to which Reconstruction (1865–1877) represented a significant change in the political and social status of African Americans.',
+        question: 'Write a well-organized essay that: presents a thesis, uses at least 6 of the 7 documents, incorporates outside evidence, and addresses historical context.',
+        parts: [
+          { label: 'Thesis:', text: 'Make a historically defensible claim that establishes a line of reasoning beyond restating the prompt.' },
+          { label: 'Context:', text: 'Describe a broader historical context relevant to the prompt — connect it to your argument.' },
+          { label: 'Evidence:', text: 'Use content from at least 6 documents AND at least one piece of outside evidence not in the documents.' },
+          { label: 'Sourcing:', text: 'For at least 3 documents, explain how historical situation, audience, purpose, or point of view affects the source\'s meaning.' },
+          { label: 'Reasoning:', text: 'Use comparison, causation, or continuity/change over time to structure your argument.' },
+        ],
+        rubric: 'Score on: Thesis (1pt), Contextualization (1pt), Evidence from docs (2pts), Outside evidence (1pt), Sourcing (1pt), Complexity (1pt). Total: 7 points.'
+      },
+      {
+        id: 2,
+        title: 'LEQ — Industrialization',
+        difficulty: 'LEQ',
+        context: null,
+        question: 'Evaluate the extent to which industrialization (1865–1900) transformed American society.',
+        parts: [
+          { label: 'Thesis:', text: 'Write a thesis that makes a historically defensible claim and establishes a line of reasoning.' },
+          { label: 'Body:', text: 'Support your argument with specific historical evidence. Address both change and continuity where relevant.' },
+          { label: 'Reasoning:', text: 'Use historical reasoning (causation, comparison, or CCOT) to frame your argument.' },
+        ],
+        rubric: 'Score on: Thesis (1pt), Evidence — specific examples (2pts), Historical reasoning (1pt), Complexity (1pt). Total: 5 points.'
+      },
+      {
+        id: 3,
+        title: 'SAQ — Cold War Origins',
+        difficulty: 'SAQ',
+        context: 'The Cold War emerged from tensions between the United States and Soviet Union following World War II.',
+        question: 'Answer all three parts. No thesis is required.',
+        parts: [
+          { label: '(a)', text: 'Briefly explain ONE cause of tension between the US and USSR after 1945.' },
+          { label: '(b)', text: 'Briefly explain ONE way the US responded to Soviet expansion between 1947 and 1953.' },
+          { label: '(c)', text: 'Briefly explain ONE way the Cold War affected American domestic society in the late 1940s–1950s.' },
+        ],
+        rubric: 'Each part worth 1 point. Must be specific and historically accurate. No thesis required — focused factual responses earn full credit.'
+      },
+    ]
+  },
+
+  euro: {
+    title: 'AP European History',
+    accent: '#8b5cf6',
+    prompts: [
+      {
+        id: 1,
+        title: 'DBQ — French Revolution',
+        difficulty: 'DBQ',
+        context: 'Evaluate the extent to which the French Revolution (1789–1799) brought about meaningful change in French society and government.',
+        question: 'Write a well-organized essay using at least 6 of the 7 documents, outside evidence, and proper sourcing.',
+        parts: [
+          { label: 'Thesis:', text: 'Make a historically defensible claim with a line of reasoning. Do not simply restate the prompt.' },
+          { label: 'Context:', text: 'Describe the broader historical situation before 1789 and connect it to your argument.' },
+          { label: 'Evidence:', text: 'Use content from at least 6 documents plus at least one piece of outside evidence.' },
+          { label: 'Sourcing:', text: 'For 3+ documents, explain how historical situation, audience, purpose, or point of view affects meaning.' },
+        ],
+        rubric: 'Score on: Thesis (1pt), Contextualization (1pt), Evidence from docs (2pts), Outside evidence (1pt), Sourcing (1pt), Complexity (1pt). Total: 7 points.'
+      },
+      {
+        id: 2,
+        title: 'LEQ — Causes of WWI',
+        difficulty: 'LEQ',
+        context: null,
+        question: 'Evaluate the most significant cause of World War I.',
+        parts: [
+          { label: 'Thesis:', text: 'Write a thesis that identifies the most significant cause and establishes your line of reasoning.' },
+          { label: 'Body:', text: 'Support with specific historical evidence. Consider militarism, alliances, imperialism, nationalism, and the immediate trigger.' },
+          { label: 'Reasoning:', text: 'Use causation as your historical reasoning framework.' },
+        ],
+        rubric: 'Score on: Thesis (1pt), Evidence — specific examples (2pts), Historical reasoning — causation (1pt), Complexity (1pt). Total: 5 points.'
+      },
+      {
+        id: 3,
+        title: 'SAQ — Scientific Revolution',
+        difficulty: 'SAQ',
+        context: 'The Scientific Revolution of the 16th and 17th centuries fundamentally changed how Europeans understood the natural world.',
+        question: 'Answer all three parts concisely. No thesis required.',
+        parts: [
+          { label: '(a)', text: 'Briefly explain ONE way the Scientific Revolution challenged traditional authority.' },
+          { label: '(b)', text: 'Briefly explain ONE way Enlightenment thinkers applied Scientific Revolution ideas to political thought.' },
+          { label: '(c)', text: 'Briefly explain ONE way the Catholic Church responded to the Scientific Revolution.' },
+        ],
+        rubric: 'Each part worth 1 point. Must be specific and historically accurate. Brief but complete responses earn full credit.'
+      },
+    ]
+  },
+
+  psychology: {
+    title: 'AP Psychology',
+    accent: '#f43f5e',
+    prompts: [
+      {
+        id: 1,
+        title: 'FRQ 1 — Concept Application',
+        difficulty: 'FRQ 1',
+        context: 'Maya is trying to learn Spanish vocabulary for an upcoming exam. She studies for 3 hours straight the night before, using only flashcards.',
+        question: 'Apply each of the following psychological concepts to explain Maya\'s learning situation.',
+        parts: [
+          { label: '(a)', text: 'Explain how the spacing effect could improve Maya\'s studying strategy.' },
+          { label: '(b)', text: 'Describe how proactive interference might affect Maya\'s ability to recall new Spanish words.' },
+          { label: '(c)', text: 'Explain how elaborative rehearsal differs from maintenance rehearsal and why it would help Maya retain vocabulary.' },
+          { label: '(d)', text: 'Identify the role of the hippocampus in Maya\'s ability to form long-term memories of the vocabulary.' },
+        ],
+        rubric: 'Each part worth 1 point. Must correctly define the concept AND apply it to Maya\'s scenario. Definition alone earns no credit.'
+      },
+      {
+        id: 2,
+        title: 'FRQ 2 — Research Design',
+        difficulty: 'FRQ 2',
+        context: 'A researcher wants to test whether listening to classical music improves performance on math tests.',
+        question: 'Answer all parts about designing this study.',
+        parts: [
+          { label: '(a)', text: 'Identify the independent variable and dependent variable in this study.' },
+          { label: '(b)', text: 'Describe how the researcher could use random assignment and explain why it is important.' },
+          { label: '(c)', text: 'Explain what a control group would look like in this experiment.' },
+          { label: '(d)', text: 'Identify one potential confounding variable and explain how it could affect the results.' },
+          { label: '(e)', text: 'Explain why the researcher cannot establish causation if this study is a correlational study.' },
+        ],
+        rubric: 'Each part worth 1 point. Must be precise — IV = classical music (yes/no), DV = math test performance (b) random assignment ensures equivalent groups (c) silence or no music (d) any valid confound with explanation (e) correlation ≠ causation explanation.'
+      },
+      {
+        id: 3,
+        title: 'FRQ 3 — Learning & Behavior',
+        difficulty: 'FRQ 1',
+        context: 'A dog trainer is teaching a dog to sit on command.',
+        question: 'Apply conditioning principles to explain the training process.',
+        parts: [
+          { label: '(a)', text: 'Explain how positive reinforcement could be used to teach the dog to sit. Give a specific example.' },
+          { label: '(b)', text: 'Explain the difference between a fixed ratio and variable ratio schedule of reinforcement and which would better maintain the sitting behavior long-term.' },
+          { label: '(c)', text: 'The dog begins sitting whenever it hears a similar word like "hit." Identify and explain the learning principle this demonstrates.' },
+        ],
+        rubric: 'Award points for: correct definition + specific example of positive reinforcement (a), accurate distinction + VR identified as more resistant to extinction (b), stimulus generalization correctly identified and explained (c).'
+      },
+    ]
+  },
+
+  english: {
+    title: 'AP English Language',
+    accent: '#f43f5e',
+    prompts: [
+      {
+        id: 1,
+        title: 'FRQ 1 — Synthesis Essay',
+        difficulty: 'Synthesis',
+        context: 'Sources A–F provide perspectives on whether social media does more harm than good for teenagers. (For this practice, draw on your own knowledge of the topic.)',
+        question: 'Write an essay that argues your position on whether social media is ultimately harmful or beneficial for teenagers. Incorporate evidence from at least 3 sources.',
+        parts: [
+          { label: 'Thesis:', text: 'Take a clear, specific position. Your thesis must be more than a statement of fact — it should be arguable.' },
+          { label: 'Evidence:', text: 'Reference at least 3 sources to support your argument. Cite them as (Source A), (Source B), etc.' },
+          { label: 'Commentary:', text: 'Explain how each piece of evidence supports your thesis. Don\'t just quote — analyze.' },
+          { label: 'Counterargument:', text: 'Address and refute at least one opposing viewpoint.' },
+        ],
+        rubric: 'Score on: Thesis (1pt), Evidence & Commentary — 4 levels (0–4pts), Sophistication (1pt). Total: 6 points.'
+      },
+      {
+        id: 2,
+        title: 'FRQ 2 — Rhetorical Analysis',
+        difficulty: 'Rhetorical Analysis',
+        context: '"We choose to go to the Moon in this decade and do the other things, not because they are easy, but because they are hard; because that goal will serve to organize and measure the best of our energies and skills…" — JFK, 1962.',
+        question: 'Write an essay that analyzes the rhetorical choices Kennedy makes to persuade his audience to support the space program.',
+        parts: [
+          { label: 'Thesis:', text: 'Write a thesis that identifies specific rhetorical strategies Kennedy uses and explains how they achieve his purpose.' },
+          { label: 'Analysis:', text: 'Analyze at least two specific rhetorical choices (diction, syntax, appeals, etc.). Explain the EFFECT each creates on the audience.' },
+          { label: 'Purpose:', text: 'Connect your analysis to Kennedy\'s overall rhetorical purpose and audience.' },
+        ],
+        rubric: 'Score on: Thesis (1pt), Evidence & Commentary — must analyze effect not just label devices (0–4pts), Sophistication (1pt). Total: 6 points.'
+      },
+      {
+        id: 3,
+        title: 'FRQ 3 — Argument Essay',
+        difficulty: 'Argument',
+        context: null,
+        question: '"Failure is the most important teacher." Write an essay that argues your position on this claim.',
+        parts: [
+          { label: 'Thesis:', text: 'Take a clear, defensible position on the claim. Your thesis should include a line of reasoning.' },
+          { label: 'Evidence:', text: 'Support your argument with specific, relevant evidence from history, literature, science, or personal experience.' },
+          { label: 'Reasoning:', text: 'Explain clearly how your evidence supports your thesis. Address complexity or nuance in the argument.' },
+          { label: 'Counterargument:', text: 'Acknowledge and respond to an opposing perspective.' },
+        ],
+        rubric: 'Score on: Thesis (1pt), Evidence & Commentary — 4 levels (0–4pts), Sophistication (1pt). Total: 6 points.'
+      },
+    ]
+  }
+
+};
+
+/* ── STATE ──────────────────────────────────── */
+let currentSubject = null;
+let currentPromptIndex = 0;
+
+/* ── INIT ───────────────────────────────────── */
+document.addEventListener('DOMContentLoaded', () => {
+  const params  = new URLSearchParams(window.location.search);
+  const subject = params.get('subject');
+  const data    = FRQ_DATA[subject];
+  if (!data) return;
+
+  currentSubject = subject;
+  document.documentElement.style.setProperty('--subject-accent', data.accent);
+  document.getElementById('frq-title').textContent    = data.title + ' — FRQ Practice';
+  document.getElementById('frq-back-link').href       = subject + '.html';
+
+  // Build tabs
+  const tabsEl = document.getElementById('frq-tabs');
+  data.prompts.forEach((p, i) => {
+    const btn = document.createElement('button');
+    btn.className = 'frq-tab' + (i === 0 ? ' active' : '');
+    btn.textContent = `FRQ ${i + 1}`;
+    btn.addEventListener('click', () => selectPrompt(i));
+    tabsEl.appendChild(btn);
+  });
+
+  // Word count
+  document.getElementById('frq-textarea').addEventListener('input', updateWordCount);
+
+  selectPrompt(0);
+});
+
+function selectPrompt(index) {
+  currentPromptIndex = index;
+  const data   = FRQ_DATA[currentSubject];
+  const prompt = data.prompts[index];
+
+  // Update tabs
+  document.querySelectorAll('.frq-tab').forEach((t, i) =>
+    t.classList.toggle('active', i === index)
+  );
+
+  // Populate prompt
+  document.getElementById('frq-prompt-title').textContent = prompt.title;
+  document.getElementById('frq-difficulty').textContent   = prompt.difficulty;
+
+  const ctxEl = document.getElementById('frq-context');
+  if (prompt.context) {
+    ctxEl.textContent = prompt.context;
+    ctxEl.style.display = 'block';
+  } else {
+    ctxEl.style.display = 'none';
+  }
+
+  document.getElementById('frq-question').textContent = prompt.question;
+
+  const partsEl = document.getElementById('frq-parts');
+  partsEl.innerHTML = '';
+  prompt.parts.forEach(part => {
+    const li = document.createElement('li');
+    li.setAttribute('data-part', part.label);
+    li.textContent = part.text;
+    partsEl.appendChild(li);
+  });
+
+  // Reset answer area
+  document.getElementById('frq-textarea').value = '';
+  document.getElementById('frq-word-count').textContent = '0 words';
+  document.getElementById('frq-submit-btn').disabled = false;
+}
+
+function updateWordCount() {
+  const text  = document.getElementById('frq-textarea').value.trim();
+  const words = text ? text.split(/\s+/).length : 0;
+  document.getElementById('frq-word-count').textContent = `${words} word${words !== 1 ? 's' : ''}`;
+}
+
+/* ── SUBMIT & GRADE ─────────────────────────── */
+function submitFRQ() {
+  const answer = document.getElementById('frq-textarea').value.trim();
+  if (answer.length < 20) {
+    alert('Please write a more complete response before submitting.');
+    return;
+  }
+
+  const data   = FRQ_DATA[currentSubject];
+  const prompt = data.prompts[currentPromptIndex];
+  const partsText = prompt.parts.map(p => p.label + ' ' + p.text).join('\n');
+
+  // Build the full message to send to ChatGPT
+  const message = `You are an experienced AP exam grader. Grade this student response and give clear feedback.
+
+SUBJECT: ${data.title}
+QUESTION TYPE: ${prompt.difficulty}
+${prompt.context ? 'CONTEXT: ' + prompt.context + '\n' : ''}QUESTION: ${prompt.question}
+PARTS:
+${partsText}
+
+RUBRIC: ${prompt.rubric}
+
+STUDENT RESPONSE:
+${answer}
+
+Please grade this and respond in this format:
+
+SCORE: [X out of Y points]
+
+WHAT YOU DID WELL:
+[2-3 specific strengths]
+
+WHAT NEEDS IMPROVEMENT:
+[2-3 specific gaps]
+
+HOW TO IMPROVE:
+[2-3 actionable suggestions]
+
+AP EXAM TIP:
+[One high-value tip for this question type]`;
+
+  // Open ChatGPT with the message pre-filled
+  const encoded = encodeURIComponent(message);
+  const url = 'https://chatgpt.com/?q=' + encoded;
+  window.open(url, '_blank');
+}
+</script>
+</body>
+</html>
