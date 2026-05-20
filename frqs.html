@@ -512,10 +512,12 @@ AP EXAM TIP:
 [One high-value tip for this question type]`;
 
   // Open ChatGPT with the message pre-filled
+  // Whne the student clicks Get FeedbCK, Js builds a chat
+  //  & gets url with the question and students answer encoded inside it, then it buillds an new tab
   const encoded = encodeURIComponent(message);
   const url = 'https://chatgpt.com/?q=' + encoded;
   window.open(url, '_blank');
-}
+} // opened with a pre-filled query parameter with window.open
 </script>
 </body>
 </html>

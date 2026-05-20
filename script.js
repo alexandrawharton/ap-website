@@ -34,10 +34,12 @@ function initNav() {
 const DECKS = {
 
   // ---------- AP CALCULUS DECK ----------
+  /* All of the flash card information is hard coded in js front and back */
   calculus: {
     title: 'AP Calculus AB / BC',
     accent: '#0ea5a0', // teal color used for this subject
-    cards: [
+    cards: [ // All the flashcard content is stored directly in the JavaScript file as a data object — no database needed. 
+    // A hardcoded nested JavaScript object containing arrays of objects
       { front: 'Power Rule', back: 'd/dx[xⁿ] = nxⁿ⁻¹\nThe exponent comes down and multiplies; reduce the exponent by 1.' },
       { front: 'Chain Rule', back: 'd/dx[f(g(x))] = f′(g(x)) · g′(x)\nDerivative of outside × derivative of inside.' },
       { front: 'Product Rule', back: 'd/dx[uv] = u′v + uv′\nFirst times derivative of second plus second times derivative of first.' },
